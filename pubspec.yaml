@@ -17,7 +17,24 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  icons_launcher: ^3.0.1
   very_good_analysis: ^7.0.0
 
 flutter:
   uses-material-design: true
+
+icons_launcher:
+  image_path: 'assets/icon.png'
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
+    macos:
+      enable: true
+    windows:
+      enable: true
+    web:
+      enable: true
+    linux:
+      enable: true
