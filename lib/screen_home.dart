@@ -109,10 +109,8 @@ class _ScreenHomeState extends State<ScreenHome> {
           if (asyncSnapshot.hasData && asyncSnapshot.data!.isNotEmpty) {
             final substances = asyncSnapshot.data!;
 
-            return GridView.count(
+            return ListView(
               padding: const EdgeInsets.all(8),
-              childAspectRatio: 0.75,
-              crossAxisCount: 1,
               children: substances
                   .map(
                     (e) => SubstanceTile(
