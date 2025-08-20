@@ -103,36 +103,41 @@ class _ScreenHomeState extends State<ScreenHome> {
       appBar: AppBar(
         title: const Text('Srot'),
       ),
-      body: FutureBuilder(
-        future: getSubstances(),
-        builder: (context, asyncSnapshot) {
-          if (asyncSnapshot.hasData && asyncSnapshot.data!.isNotEmpty) {
-            final substances = asyncSnapshot.data!;
+      body: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 400),
+          child: FutureBuilder(
+            future: getSubstances(),
+            builder: (context, asyncSnapshot) {
+              if (asyncSnapshot.hasData && asyncSnapshot.data!.isNotEmpty) {
+                final substances = asyncSnapshot.data!;
 
-            return ListView(
-              padding: const EdgeInsets.all(8),
-              children: substances
-                  .map(
-                    (e) => SubstanceTile(
-                      substance: e,
-                      onTap: () async {
-                        await updateSubstance(e);
-                        setState(() {});
-                      },
-                      onLongPress: () async {
-                        await _removeSubstance(e);
-                        setState(() {});
-                      },
-                    ),
-                  )
-                  .toList(),
-            );
-          } else {
-            return const Center(
-              child: Text('Nothing to show.'),
-            );
-          }
-        },
+                return ListView(
+                  padding: const EdgeInsets.all(8),
+                  children: substances
+                      .map(
+                        (e) => SubstanceTile(
+                          substance: e,
+                          onTap: () async {
+                            await updateSubstance(e);
+                            setState(() {});
+                          },
+                          onLongPress: () async {
+                            await _removeSubstance(e);
+                            setState(() {});
+                          },
+                        ),
+                      )
+                      .toList(),
+                );
+              } else {
+                return const Center(
+                  child: Text('Nothing to show.'),
+                );
+              }
+            },
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _addSubstance,
