@@ -1,7 +1,4 @@
 basil:
-  code_generation:
-    cmds:
-      - 'flutter pub run build_runner build --delete-conflicting-outputs'
   build_apk:
     cmds:
       - 'flutter build apk --release'
