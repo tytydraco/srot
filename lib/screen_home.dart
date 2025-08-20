@@ -68,6 +68,35 @@ class _ScreenHomeState extends State<ScreenHome> {
     );
   }
 
+  Future<void> _removeSubstance(Substance substance) async {
+    await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Remove'),
+        content: Column(
+          spacing: 4,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Are you sure you want to remove ${substance.name}?'),
+          ],
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              await removeSubstance(substance);
+              if (context.mounted) Navigator.pop(context);
+            },
+            child: const Text('Ok'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +110,8 @@ class _ScreenHomeState extends State<ScreenHome> {
             final substances = asyncSnapshot.data!;
 
             return GridView.count(
+              padding: const EdgeInsets.all(8),
+              childAspectRatio: 0.75,
               crossAxisCount: 2,
               children: substances
                   .map(
@@ -88,6 +119,10 @@ class _ScreenHomeState extends State<ScreenHome> {
                       substance: e,
                       onTap: () async {
                         await updateSubstance(e);
+                        setState(() {});
+                      },
+                      onLongPress: () async {
+                        await _removeSubstance(e);
                         setState(() {});
                       },
                     ),

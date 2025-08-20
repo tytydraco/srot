@@ -8,6 +8,7 @@ class SubstanceTile extends StatefulWidget {
   const SubstanceTile({
     required this.substance,
     required this.onTap,
+    required this.onLongPress,
     super.key,
   });
 
@@ -16,6 +17,9 @@ class SubstanceTile extends StatefulWidget {
 
   /// The callback function.
   final void Function() onTap;
+
+  /// The callback function to delete.
+  final void Function() onLongPress;
 
   @override
   State<SubstanceTile> createState() => _SubstanceTileState();
@@ -77,9 +81,10 @@ class _SubstanceTileState extends State<SubstanceTile> {
     final progressColor = (progressValue == 1) ? Colors.green : Colors.red;
 
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(4),
       child: InkWell(
         onTap: widget.onTap,
+        onLongPress: widget.onLongPress,
         child: Card(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -87,7 +92,10 @@ class _SubstanceTileState extends State<SubstanceTile> {
             children: [
               ListTile(
                 leading: const Icon(Icons.medical_information),
-                title: Text(widget.substance.name),
+                title: Text(
+                  widget.substance.name,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
               ListTile(
                 leading: const Icon(Icons.timelapse),
