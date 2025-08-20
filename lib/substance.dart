@@ -4,14 +4,14 @@ class Substance {
   Substance({
     required this.name,
     required this.daysBetween,
-    required this.lastUsed,
+    this.lastUsed,
   });
 
   /// Creates a new [Substance] from JSON.
   Substance.fromJson(Map<String, dynamic> json)
       : name = json['name'] as String,
         daysBetween = json['days_between'] as int,
-        lastUsed = json['last_used'] as double;
+        lastUsed = json['last_used'] as int?;
 
   /// The substance name.
   final String name;
@@ -20,7 +20,7 @@ class Substance {
   final int daysBetween;
 
   /// The epoch time the substance was last used.
-  final double? lastUsed;
+  int? lastUsed;
 
   /// Convert to JSON.
   Map<String, dynamic> toJson() => {

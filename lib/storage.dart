@@ -18,7 +18,7 @@ Future<List<Substance>> getSubstances() async {
   return substances ?? [];
 }
 
-/// Add a saved [Substance].
+/// Add a saved [Subst
 Future<void> addSubstance(Substance substance) async {
   final sharedPrefs = await SharedPreferences.getInstance();
 
@@ -33,6 +33,17 @@ Future<void> addSubstance(Substance substance) async {
   ).toList();
 
   await sharedPrefs.setStringList('substances', substancesJson);
+}
+
+/// Update a saved [Substance]'s used time.
+Future<void> updateSubstance(Substance substance) async {
+  final substances = await getSubstances();
+
+  final idx =
+      substances.indexWhere((element) => element.name == substance.name);
+  substances[idx].lastUsed = DateTime.now().millisecondsSinceEpoch;
+
+  await setSubstances(substances);
 }
 
 /// Remove a saved [Substance] by name.
