@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srot/screen_home.dart';
 
 void main() {
   runApp(const Srot());
@@ -12,12 +13,12 @@ class Srot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Srot',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Container(),
+      home: const ScreenHome(),
     );
   }
 }
