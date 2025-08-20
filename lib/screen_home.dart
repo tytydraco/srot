@@ -54,7 +54,7 @@ class _ScreenHomeState extends State<ScreenHome> {
             onPressed: () async {
               final substance = Substance(
                 name: nameController.text,
-                daysBetween: int.parse(daysBetweenController.text),
+                daysBetween: int.tryParse(daysBetweenController.text) ?? 0,
               );
               await addSubstance(substance);
               setState(() {});
@@ -112,7 +112,7 @@ class _ScreenHomeState extends State<ScreenHome> {
             return GridView.count(
               padding: const EdgeInsets.all(8),
               childAspectRatio: 0.75,
-              crossAxisCount: 2,
+              crossAxisCount: 1,
               children: substances
                   .map(
                     (e) => SubstanceTile(

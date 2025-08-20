@@ -13,7 +13,8 @@ Future<List<Substance>> getSubstances() async {
       final json = jsonDecode(e) as Map<String, dynamic>;
       return Substance.fromJson(json);
     },
-  ).toList();
+  ).toList()
+    ?..sort((a, b) => a.name.compareTo(b.name));
 
   return substances ?? [];
 }
