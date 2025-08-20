@@ -1,0 +1,15 @@
+basil:
+  code_generation:
+    cmds:
+      - 'flutter pub run build_runner build --delete-conflicting-outputs'
+  build_apk:
+    cmds:
+      - 'flutter build apk --release'
+  build_web:
+    cmds:
+      - 'flutter build web --release --web-renderer html --base-href "/build/web/"'
+  publish:
+    cmds:
+      - 'git add -f build/web/'
+      - 'bash -c "git commit -sam \"Build web: $(date)\""'
+      - 'git push'
